@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Entreprise } from '../model/entreprise.model';
 import { EntrepriseService } from '../services/entreprise.service';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-entreprises',
@@ -14,7 +15,9 @@ export class EntreprisesComponent implements OnInit {
 
   entreprises: Entreprise[];
 
-  constructor(private entrepriseService: EntrepriseService) {
+  constructor(private entrepriseService: EntrepriseService,
+              public authService: AuthService
+  ) {
     this.entreprises = entrepriseService . listeEntreprises();
   }
 

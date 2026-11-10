@@ -1,35 +1,29 @@
 <div class="container">
-<form class="form-inline">
-<div class="form-group mx-sm-3 mb-2 mt-2 ">
-<label>Nom Entreprise en tapant</label>
-<input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control" >
-</div>
-</form>
+  <div class="row">
+    <div class="col-sm-6 mb-4">
+      <label for="idSec" class="form-label">Secteur</label>
+      <div class="input-group">
+        <select
+          class="form-select"
+          id="idSec"
+          name="idSec"
+          [(ngModel)]="IdSecteur">
+          <option [ngValue]="null">Choisir un secteur</option>
+          <option *ngFor="let sec of secteurs" [ngValue]="sec.idSecteur">
+            {{ sec.nomSecteur }}
+          </option>
+        </select>
+        <button
+          class="btn btn-primary"
+          type="button"
+          [disabled]="IdSecteur === null"
+          (click)="rechercherParSecteur()">
+          Rechercher
+        </button>
+      </div>
+    </div>
+  </div>
 
-<!-- <form class="form-inline">
-<div class="form-group mx-sm-3 mb-2 mt-2 ">
-<label>Nom Entreprise en tapant</label>
-<input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
-</div>
-</form> -->
-
-    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
-  <label>Secteurs</label>
-
-  <select
-    class="form-control form-control-lg"
-    id="idSec"
-    name="idSec"
-    [(ngModel)]="IdSecteur"
-    (change)="onChange()">
-
-    <option *ngFor="let sec of secteurs"
-            [value]="sec.idSecteur">
-      {{ sec.nomSecteur }}
-    </option>
-
-  </select>
-</div>
   <div class="card shadow mb-4">
     <div class="card-body">
 
@@ -52,7 +46,7 @@
         </thead>
 
         <tbody>
-          @for (entreprise of entreprises | searchFilter : searchTerm ; track entreprise.idEntreprise; let index = $index) {
+          @for (entreprise of entreprises; track entreprise.idEntreprise; let index = $index) {
             <tr>
               <td>{{ index + 1 }}</td>
               <td>{{ entreprise.idEntreprise }}</td>

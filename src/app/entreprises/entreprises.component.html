@@ -35,7 +35,7 @@
               <td>{{ entreprise.chiffreAffaires }}</td> 
               <td>{{ entreprise.dateCreation | date:'dd/MM/yyyy' }}</td> 
               <td>{{entreprise.secteur.nomSecteur}}</td>
- 
+              @if(authService.isAdmin()){
               <td> 
                 <a class="btn btn-danger" 
                    (click)="supprimerEntreprise(entreprise)"> 
@@ -48,7 +48,7 @@
                    [routerLink]="['/updateEntreprise', entreprise.idEntreprise]"> 
                   Modifier 
                 </a> 
-              </td> 
+              </td> }
             </tr>
             
 

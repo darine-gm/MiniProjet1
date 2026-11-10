@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 mb-4">
+      <label for="searchTerm" class="form-label">Nom de l'entreprise</label>
+      <div class="input-group">
+        <input
+          id="searchTerm"
+          [(ngModel)]="searchTerm"
+          name="searchTerm"
+          class="form-control">
+        <button class="btn btn-primary" type="button" (click)="rechercherParNom()">
+          Rechercher
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h2>Liste des Entreprises</h2>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Chiffre d'affaires</th>
+            <th>Date Création</th>
+            <th>Secteur</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (entreprise of entreprises; track entreprise.idEntreprise; let index = $index) {
+            <tr>
+              <td>{{ index + 1 }}</td>
+              <td>{{ entreprise.idEntreprise }}</td>
+              <td>{{ entreprise.nomEntreprise }}</td>
+              <td>{{ entreprise.adresse }}</td>
+              <td>{{ entreprise.chiffreAffaires }}</td>
+              <td>{{ entreprise.dateCreation | date:'dd/MM/yyyy' }}</td>
+              <td>{{ entreprise.secteur.nomSecteur }}</td>
+              <td>
+                <a class="btn btn-danger" (click)="supprimerEntreprise(entreprise)">
+                  Supprimer
+                </a>
+              </td>
+              <td>
+                <a class="btn btn-success"
+                   [routerLink]="['/updateEntreprise', entreprise.idEntreprise]">
+                  Modifier
+                </a>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="9">
+                <h3>Aucune entreprise trouvée</h3>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
